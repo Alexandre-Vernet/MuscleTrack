@@ -1,0 +1,23 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-title>
+            Exercises
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">Exercises</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <app-chest [exercises]="exercises"></app-chest>
+    <app-abs [exercises]="exercises"></app-abs>
+    <app-back [exercises]="exercises"></app-back>
+    <app-biceps [exercises]="exercises"></app-biceps>
+    <app-quad [exercises]="exercises"></app-quad>
+    <app-shoulders [exercises]="exercises"></app-shoulders>
+    <app-triceps [exercises]="exercises"></app-triceps>
+</ion-content>
