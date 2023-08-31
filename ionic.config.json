@@ -1,0 +1,7 @@
+{
+  "name": "MuscleTrack",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
