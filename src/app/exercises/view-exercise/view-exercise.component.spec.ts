@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { QuadComponent } from './quad.component';
+import { ViewExerciseComponent } from './view-exercise.component';
 
-describe('QuadComponent', () => {
-  let component: QuadComponent;
-  let fixture: ComponentFixture<QuadComponent>;
+describe('ViewExerciseComponent', () => {
+  let component: ViewExerciseComponent;
+  let fixture: ComponentFixture<ViewExerciseComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuadComponent ],
+      declarations: [ ViewExerciseComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(QuadComponent);
+    fixture = TestBed.createComponent(ViewExerciseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));
