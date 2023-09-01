@@ -1,5 +1,6 @@
 export interface Exercise {
     name: string;
     reps: string;
-    img: string;
+    image: string;
+    weight: string;
 }

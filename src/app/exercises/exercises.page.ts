@@ -1,37 +1,25 @@
-import { Component } from '@angular/core';
-import { Exercise } from "./exercise";
+import { Component, OnInit } from '@angular/core';
+import { ExercisesService } from "./exercises.service";
 
 @Component({
     selector: 'app-exercises',
     templateUrl: 'exercises.page.html',
     styleUrls: ['exercises.page.scss']
 })
-export class ExercisesPage {
+export class ExercisesPage implements OnInit {
+    muscles: string[] = [];
 
-    exercises: Exercise[] = [
-        {
-            name: 'Lorem ipsum',
-            reps: '4 séries de 10 répétitions',
-            img: 'assets/img/exercises/image.jpg'
-        },
-        {
-            name: 'Lorem ipsum',
-            reps: '4 séries de 10 répétitions',
-            img: 'assets/img/exercises/image.jpg'
-        },
-        {
-            name: 'Lorem ipsum',
-            reps: '4 séries de 10 répétitions',
-            img: 'assets/img/exercises/image.jpg'
-        },
-        {
-            name: 'Lorem ipsum',
-            reps: '4 séries de 10 répétitions',
-            img: 'assets/img/exercises/image.jpg'
-        }
-    ];
+    constructor(
+        private readonly exercisesService: ExercisesService
+    ) {
 
-    constructor() {
+    }
+
+    ngOnInit() {
+        this.exercisesService.getAllMusclesName()
+            .then((muscles) => {
+                this.muscles = muscles;
+            });
     }
 
 }

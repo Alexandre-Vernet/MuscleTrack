@@ -21,7 +21,7 @@ const routes: Routes = [
             },
             {
                 path: '',
-                redirectTo: '/tabs/exercises',
+                redirectTo: '/tabs/exercise-card',
                 pathMatch: 'full'
             }
         ]

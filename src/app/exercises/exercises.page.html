@@ -13,11 +13,7 @@
         </ion-toolbar>
     </ion-header>
 
-    <app-chest [exercises]="exercises"></app-chest>
-    <app-abs [exercises]="exercises"></app-abs>
-    <app-back [exercises]="exercises"></app-back>
-    <app-biceps [exercises]="exercises"></app-biceps>
-    <app-quad [exercises]="exercises"></app-quad>
-    <app-shoulders [exercises]="exercises"></app-shoulders>
-    <app-triceps [exercises]="exercises"></app-triceps>
+    <ng-container *ngFor="let muscle of muscles">
+        <app-exercise-card [muscle]="muscle"></app-exercise-card>
+    </ng-container>
 </ion-content>
