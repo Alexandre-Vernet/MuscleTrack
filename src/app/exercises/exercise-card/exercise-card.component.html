@@ -5,6 +5,9 @@
             <ion-label>{{p.name}}</ion-label>
             <ion-label>{{p.reps}}</ion-label>
             <ion-label>{{p.weight}}</ion-label>
+            <ion-router-link routerLink="/tabs/exercises/exercise/{{muscle}}/{{ p.name }}">
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+            </ion-router-link>
         </ion-item>
     </ion-list>
 </div>

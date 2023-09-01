@@ -6,6 +6,7 @@ import { ExercisesPage } from './exercises.page';
 import { ExploreContainerComponentModule } from '../explore-container/explore-container.module';
 import { ExercisesPageRoutingModule } from './exercises-routing.module';
 import { ExerciseCardComponent } from "./exercise-card/exercise-card.component";
+import { ViewExerciseComponent } from "./view-exercise/view-exercise.component";
 
 @NgModule({
     imports: [
@@ -13,11 +14,12 @@ import { ExerciseCardComponent } from "./exercise-card/exercise-card.component";
         CommonModule,
         FormsModule,
         ExploreContainerComponentModule,
-        ExercisesPageRoutingModule
+        ExercisesPageRoutingModule,
     ],
     declarations: [
         ExercisesPage,
-        ExerciseCardComponent
+        ExerciseCardComponent,
+        ViewExerciseComponent
     ]
 })
 export class ExercisesPageModule {

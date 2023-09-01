@@ -12,7 +12,7 @@ export class ExercisesService {
     constructor() {
     }
 
-    async getAllMusclesName() {
+    async getAllMusclesName(): Promise<string[]> {
         const q = query(collection(this.db, "exercises"));
         const exercises: string[] = [];
 
@@ -45,6 +45,25 @@ export class ExercisesService {
             return exercises;
         } else {
             return [];
+        }
+    }
+
+    async getExerciseInfo(muscleName: string, exerciseName: string): Promise<Exercise> {
+        const docRef = doc(this.db, "exercises", muscleName);
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            return {
+                ...docSnap.data()[exerciseName],
+                name: exerciseName
+            }
+        } else {
+            return {
+                name: '',
+                reps: '0',
+                image: '',
+                weight: '0'
+            }
         }
     }
 }
