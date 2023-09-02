@@ -5,3 +5,11 @@ export interface Exercise {
     weight?: string;
     description?: string;
 }
+
+export interface AddExercise {
+    muscle: string;
+    name: string;
+    reps: string;
+    image: string;
+    description: string;
+}

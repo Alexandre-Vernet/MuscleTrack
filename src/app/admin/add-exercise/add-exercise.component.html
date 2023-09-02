@@ -1,0 +1,57 @@
+<h1>Add exercise</h1>
+<form [formGroup]="formAddExercise">
+    <ion-list>
+        <!--Exercise name-->
+        <ion-item>
+            <ion-input
+                formControlName="name"
+                label="Exercise name"
+                placeholder="Développé couché"></ion-input>
+        </ion-item>
+
+        <!--Muscle-->
+        <ion-item>
+            <ion-select
+                formControlName="muscle"
+                label="Targeted muscle"
+                label-placement="floating">
+                <ng-container *ngFor="let muscle of muscles">
+                    <ion-select-option
+                        value="{{muscle}}"
+                    >{{ muscle.charAt(0).toUpperCase() + muscle.slice(1) }}</ion-select-option>
+                </ng-container>
+            </ion-select>
+        </ion-item>
+
+        <!--Reps-->
+        <ion-item>
+            <ion-input
+                formControlName="reps"
+                label="Reps"
+                placeholder="4 séries 10 reps"></ion-input>
+        </ion-item>
+
+        <!--Image-->
+        <ion-item>
+            <ion-input
+                formControlName="image"
+                label="Image URL"
+                placeholder="https://entrainement-sportif.fr/abdominaux-coude-genou-oppose.gif"></ion-input>
+        </ion-item>
+
+        <!--Description-->
+        <ion-item>
+            <ion-textarea
+                formControlName="description"
+                label="Description" placeholder="Lorem ipsum"></ion-textarea>
+        </ion-item>
+
+        <!--Submit-->
+        <ion-item>
+            <ion-button (click)="addExercise()" [disabled]="!formAddExercise.valid">
+                <ion-icon name="add-outline"></ion-icon>
+                Add exercise
+            </ion-button>
+        </ion-item>
+    </ion-list>
+</form>
