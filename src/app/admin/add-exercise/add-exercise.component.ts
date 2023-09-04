@@ -19,7 +19,7 @@ export class AddExerciseComponent implements OnInit, OnChanges {
         name: new FormControl('', [Validators.required]),
         reps: new FormControl('', [Validators.required]),
         image: new FormControl('', [Validators.required]),
-        description: new FormControl('', [Validators.required]),
+        description: new FormControl(''),
     });
 
     constructor(
