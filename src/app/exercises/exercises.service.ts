@@ -33,6 +33,7 @@ export class ExercisesService {
         if (docSnap.exists()) {
             const exercises: Exercise[] = Object.keys(docSnap.data()).map((key) => {
                 return {
+                    muscle: muscleName,
                     name: key,
                     reps: docSnap.data()[key].reps,
                     image: docSnap.data()[key].image,
@@ -59,6 +60,7 @@ export class ExercisesService {
             }
         } else {
             return {
+                muscle: '',
                 name: '',
                 reps: '0',
                 image: '',

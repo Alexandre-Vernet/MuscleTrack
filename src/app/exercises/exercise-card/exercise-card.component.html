@@ -1,11 +1,15 @@
 <div class="card">
-    <h1>{{muscle.charAt(0).toUpperCase() + muscle.slice(1)}}</h1>
+    <h1>{{ muscle.charAt(0).toUpperCase() + muscle.slice(1) }}</h1>
     <ion-list>
-        <ion-item *ngFor="let p of exercises">
-            <ion-label>{{p.name}}</ion-label>
-            <ion-label>{{p.reps}}</ion-label>
-            <ion-label>{{p.weight}}</ion-label>
-            <ion-router-link routerLink="/tabs/exercises/exercise/{{muscle}}/{{ p.name }}">
+        <ion-item *ngFor="let exercise of exercises">
+            <ion-label>{{exercise.name}}</ion-label>
+            <ion-label>{{exercise.reps}}</ion-label>
+            <ion-label>{{exercise.weight}}</ion-label>
+            <!-- Edit -->
+            <ion-icon (click)="openModalUpdateExercise(exercise)" name="create-outline"></ion-icon>
+
+            <!-- View -->
+            <ion-router-link routerLink="/tabs/exercises/exercise/{{muscle}}/{{ exercise.name }}">
                 <ion-icon name="arrow-forward-outline"></ion-icon>
             </ion-router-link>
         </ion-item>

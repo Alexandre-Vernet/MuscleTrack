@@ -6,6 +6,7 @@ import { ExercisesPage } from './exercises.page';
 import { ExercisesPageRoutingModule } from './exercises-routing.module';
 import { ExerciseCardComponent } from "./exercise-card/exercise-card.component";
 import { ViewExerciseComponent } from "./view-exercise/view-exercise.component";
+import { AdminModule } from "../admin/admin.module";
 
 @NgModule({
     imports: [
@@ -13,6 +14,7 @@ import { ViewExerciseComponent } from "./view-exercise/view-exercise.component";
         CommonModule,
         FormsModule,
         ExercisesPageRoutingModule,
+        AdminModule,
     ],
     declarations: [
         ExercisesPage,

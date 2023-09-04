@@ -14,6 +14,8 @@
     </ion-header>
 
     <ng-container *ngFor="let muscle of muscles">
-        <app-exercise-card [muscle]="muscle"></app-exercise-card>
+        <app-exercise-card [muscle]="muscle" (openModalEditExercise)="setUpdateExercise($event)"></app-exercise-card>
     </ng-container>
+
+    <app-add-exercise [updateExercise]="updateExercise"></app-add-exercise>
 </ion-content>

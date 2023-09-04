@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { Exercise } from "../exercise";
 import { ExercisesService } from "../exercises.service";
+import { Subject } from "rxjs";
 
 @Component({
     selector: 'app-exercise-card',
@@ -8,8 +9,8 @@ import { ExercisesService } from "../exercises.service";
     styleUrls: ['./exercise-card.component.scss'],
 })
 export class ExerciseCardComponent implements OnInit {
-
     @Input() muscle: string = '';
+    @Output() openModalEditExercise = new Subject<Exercise>();
     exercises: Exercise[] = [];
 
     constructor(
@@ -22,5 +23,9 @@ export class ExerciseCardComponent implements OnInit {
             .then((exercises) => {
                 this.exercises = exercises;
             });
+    }
+
+    openModalUpdateExercise(exercise: Exercise) {
+        this.openModalEditExercise.next(exercise);
     }
 }

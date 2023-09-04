@@ -1,16 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
 import { ExercisesService } from "../../exercises/exercises.service";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { AddExercise } from "../../exercises/exercise";
+import { Exercise } from "../../exercises/exercise";
 import { AdminService } from "../admin.service";
+import { IonModal } from "@ionic/angular";
 
 @Component({
     selector: 'app-add-exercise',
     templateUrl: './add-exercise.component.html',
     styleUrls: ['./add-exercise.component.scss'],
 })
-export class AddExerciseComponent implements OnInit {
+export class AddExerciseComponent implements OnInit, OnChanges {
+    @Input() updateExercise: Exercise;
     muscles: string[] = [];
+    @ViewChild(IonModal) modal: IonModal;
     formAddExercise = new FormGroup({
         muscle: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
@@ -32,9 +35,22 @@ export class AddExerciseComponent implements OnInit {
             });
     }
 
+    ngOnChanges() {
+        if (this.updateExercise) {
+            this.formAddExercise.patchValue(this.updateExercise);
+            document.getElementById("open-modal").click();
+        }
+    }
+
+    submit() {
+        if (this.formAddExercise.valid) {
+            this.addExercise();
+        }
+    }
+
     async addExercise() {
         const { muscle, name, reps, image, description } = this.formAddExercise.value;
-        const exercise: AddExercise = {
+        const exercise: Exercise = {
             muscle,
             name,
             reps,
@@ -42,9 +58,14 @@ export class AddExerciseComponent implements OnInit {
             description,
         };
 
-        await this.adminService.addExercise(exercise);
+        await this.adminService.addOrUpdateExercise(exercise);
 
-        // Reset the form
+        // Close the modal
+        this.closeModal()
+    }
+
+    closeModal() {
+        this.modal.dismiss(null, 'cancel');
         this.formAddExercise.reset();
     }
 }

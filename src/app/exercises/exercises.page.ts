@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ExercisesService } from "./exercises.service";
+import { Exercise } from "./exercise";
 
 @Component({
     selector: 'app-exercises',
@@ -7,6 +8,7 @@ import { ExercisesService } from "./exercises.service";
     styleUrls: ['exercises.page.scss']
 })
 export class ExercisesPage implements OnInit {
+    @Input() updateExercise: Exercise;
     muscles: string[] = [];
 
     constructor(
@@ -22,4 +24,7 @@ export class ExercisesPage implements OnInit {
             });
     }
 
+    setUpdateExercise($event: Exercise) {
+        this.updateExercise = $event;
+    }
 }
