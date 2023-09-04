@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { doc, getFirestore, setDoc } from "firebase/firestore";
+import { deleteField, doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
 import { ToastService } from "../toast/toast.service";
 import { Exercise } from "../exercises/exercise";
 
@@ -26,5 +26,15 @@ export class AdminService {
 
         // Display a toast
         this.toastService.showToast('Exercise added');
+    }
+
+    async deleteExercise(exercise: Exercise) {
+        const muscleRef = doc(this.db, 'exercises', exercise.muscle);
+        await updateDoc(muscleRef, {
+            [exercise.name]: deleteField()
+        });
+
+        // Display a toast
+        this.toastService.showToast('Exercise deleted');
     }
 }

@@ -8,6 +8,9 @@
             <!-- Edit -->
             <ion-icon (click)="openModalUpdateExercise(exercise)" name="create-outline"></ion-icon>
 
+            <!-- Delete -->
+            <ion-icon (click)="deleteExercise(exercise)" name="trash-outline"></ion-icon>
+
             <!-- View -->
             <ion-router-link routerLink="/tabs/exercises/exercise/{{muscle}}/{{ exercise.name }}">
                 <ion-icon name="arrow-forward-outline"></ion-icon>

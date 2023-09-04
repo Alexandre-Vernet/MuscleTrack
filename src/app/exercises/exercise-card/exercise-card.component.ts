@@ -2,6 +2,7 @@ import { Component, Input, OnInit, Output } from '@angular/core';
 import { Exercise } from "../exercise";
 import { ExercisesService } from "../exercises.service";
 import { Subject } from "rxjs";
+import { AdminService } from "../../admin/admin.service";
 
 @Component({
     selector: 'app-exercise-card',
@@ -14,7 +15,8 @@ export class ExerciseCardComponent implements OnInit {
     exercises: Exercise[] = [];
 
     constructor(
-        private readonly exercisesService: ExercisesService
+        private readonly exercisesService: ExercisesService,
+        private readonly adminService: AdminService,
     ) {
     }
 
@@ -27,5 +29,9 @@ export class ExerciseCardComponent implements OnInit {
 
     openModalUpdateExercise(exercise: Exercise) {
         this.openModalEditExercise.next(exercise);
+    }
+
+    async deleteExercise(exercise: Exercise) {
+        await this.adminService.deleteExercise(exercise);
     }
 }
