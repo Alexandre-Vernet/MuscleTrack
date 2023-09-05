@@ -12,16 +12,12 @@ const routes: Routes = [
                 loadChildren: () => import('../exercises/exercises.module').then(m => m.ExercisesPageModule)
             },
             {
-                path: 'tab2',
-                loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-            },
-            {
-                path: 'tab3',
-                loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
+                path: 'admin',
+                loadChildren: () => import('../admin/admin.module').then(m => m.AdminModule)
             },
             {
                 path: '',
-                redirectTo: '/tabs/exercises',
+                redirectTo: '/tabs/exercise-card',
                 pathMatch: 'full'
             }
         ]

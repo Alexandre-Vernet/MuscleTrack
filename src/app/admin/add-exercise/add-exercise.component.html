@@ -1,0 +1,31 @@
+<ion-modal [isOpen]="isModalOpen" (willDismiss)="closeModal()">
+    <ng-template>
+        <ion-header>
+            <ion-toolbar>
+                <ion-buttons slot="start">
+                    <ion-button (click)="closeModal()">Cancel</ion-button>
+                </ion-buttons>
+                <ion-title>
+                    <h1>
+                        {{ updateExercise.name }}
+                    </h1>
+                </ion-title>
+                <ion-buttons slot="end">
+                    <ion-button (click)="submit()" [strong]="true">
+                        Update
+                    </ion-button>
+                </ion-buttons>
+            </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding">
+            <app-form-add-exercise [inputUpdateExercise]="updateExercise"
+                                   (openModalUpdateExercise)="closeModal()"></app-form-add-exercise>
+        </ion-content>
+    </ng-template>
+</ion-modal>
+
+
+<ng-container *ngIf="currentRoute.includes('admin')">
+    <h1>Add exercise</h1>
+    <app-form-add-exercise [inputUpdateExercise]="updateExercise"></app-form-add-exercise>
+</ng-container>

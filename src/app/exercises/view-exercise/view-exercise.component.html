@@ -1,0 +1,30 @@
+<ion-header [translucent]="true">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button default-href="/tabs/exercises"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{ exerciseName }}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+    <ion-header collapse="condense">
+        <ion-toolbar>
+            <ion-title size="large">{{ exerciseName }}</ion-title>
+        </ion-toolbar>
+    </ion-header>
+
+    <ng-container *ngIf="exercise">
+        <div class="container">
+            <h1>{{ exercise.name }}</h1>
+            <h3>{{ exercise.weight }}</h3>
+            <h3>{{ exercise.sets }}</h3>
+            <img src="{{ exercise.image }}" alt="exercise image">
+            <p>
+                {{ exercise.description }}
+            </p>
+        </div>
+    </ng-container>
+</ion-content>

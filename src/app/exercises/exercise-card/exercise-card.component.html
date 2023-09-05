@@ -1,0 +1,27 @@
+<div class="card">
+    <h1>{{ muscle.charAt(0).toUpperCase() + muscle.slice(1) }}</h1>
+    <ion-list>
+        <ion-item *ngFor="let exercise of exercises">
+            <ion-label>{{ exercise.name }}</ion-label>
+            <ion-label>{{ exercise.sets }}</ion-label>
+
+            <!-- Weight -->
+            <ion-item *ngIf="exercise.weight">
+                <ion-icon (click)="decreaseWeight(exercise)" class="cursor-pointer" name="remove-circle-outline"></ion-icon>
+                <ion-label>{{ exercise.weight }} kg</ion-label>
+                <ion-icon (click)="increaseWeight(exercise)" class="cursor-pointer" name="add-circle-outline"></ion-icon>
+            </ion-item>
+
+            <!-- Edit -->
+            <ion-icon (click)="openModalUpdateExercise(exercise)" name="create-outline"></ion-icon>
+
+            <!-- Delete -->
+            <ion-icon (click)="deleteExercise(exercise)" name="trash-outline"></ion-icon>
+
+            <!-- View -->
+            <ion-router-link routerLink="/tabs/exercises/exercise/{{muscle}}/{{ exercise.name }}">
+                <ion-icon name="arrow-forward-outline"></ion-icon>
+            </ion-router-link>
+        </ion-item>
+    </ion-list>
+</div>
