@@ -1,5 +1,4 @@
-<ion-button class="hide" id="open-modal" expand="block">Open</ion-button>
-<ion-modal trigger="open-modal" (willDismiss)="closeModal()">
+<ion-modal [isOpen]="isModalOpen" (willDismiss)="closeModal()">
     <ng-template>
         <ion-header>
             <ion-toolbar>
@@ -8,7 +7,7 @@
                 </ion-buttons>
                 <ion-title>
                     <h1>
-                        {{ formAddExercise.controls.name.value }}
+                        {{ updateExercise.name }}
                     </h1>
                 </ion-title>
                 <ion-buttons slot="end">
@@ -19,114 +18,8 @@
             </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-            <form [formGroup]="formAddExercise">
-                <ion-list>
-                    <!--Exercise name-->
-                    <ion-item>
-                        <ion-input
-                            formControlName="name"
-                            label="Exercise name"
-                            placeholder="Développé couché"></ion-input>
-                    </ion-item>
-                    <span
-                        *ngIf="formAddExercise.controls.name.hasError('required') && formAddExercise.controls.name.touched"
-                        class="error-message">
-                Exercise name is required
-            </span>
-
-                    <!--Muscle-->
-                    <ion-item>
-                        <ion-select
-                            formControlName="muscle"
-                            label="Targeted muscle"
-                            label-placement="floating">
-                            <ng-container *ngFor="let muscle of muscles">
-                                <ion-select-option
-                                    value="{{muscle}}"
-                                >{{ muscle.charAt(0).toUpperCase() + muscle.slice(1) }}</ion-select-option>
-                            </ng-container>
-                        </ion-select>
-                    </ion-item>
-
-                    <span
-                        *ngIf="formAddExercise.controls.muscle.hasError('required') && formAddExercise.controls.muscle.touched"
-                        class="error-message">
-                Targeted muscle is required
-            </span>
-
-                    <!--Weight-->
-                    <ion-item>
-                        <ion-input
-                            type="number"
-                            min="0"
-                            formControlName="weight"
-                            label="Weight"
-                            placeholder="50"></ion-input>
-                    </ion-item>
-                    <span
-                        *ngIf="formAddExercise.controls.weight.hasError('negative') && formAddExercise.controls.weight.touched"
-                        class="error-message">
-                Weight must be at least 1
-            </span>
-
-                    <!--Sets-->
-                    <ion-item>
-                        <ion-input
-                            formControlName="sets"
-                            label="Sets"
-                            placeholder="4 séries 10 reps"></ion-input>
-                    </ion-item>
-                    <span
-                        *ngIf="formAddExercise.controls.sets.hasError('required') && formAddExercise.controls.sets.touched"
-                        class="error-message">
-                Sets is required
-            </span>
-
-                    <!--Image-->
-                    <ion-item>
-                        <ion-input
-                            formControlName="image"
-                            label="Image URL"
-                            placeholder="https://entrainement-sportif.fr/abdominaux-coude-genou-oppose.gif"></ion-input>
-                    </ion-item>
-                    <span
-                        *ngIf="formAddExercise.controls.image.hasError('required') && formAddExercise.controls.image.touched"
-                        class="error-message">
-                Image is required
-            </span>
-                    <span
-                        *ngIf="formAddExercise.controls.image.hasError('maxlength') && formAddExercise.controls.image.touched"
-                        class="error-message">
-                Image URL is too long (max 200 characters)
-            </span>
-
-                    <!--Description-->
-                    <ion-item>
-                        <ion-textarea
-                            formControlName="description"
-                            maxlength="200"
-                            label="Description" placeholder="Lorem ipsum"></ion-textarea>
-                    </ion-item>
-                    <span
-                        *ngIf="formAddExercise.controls.description.hasError('required') && formAddExercise.controls.description.touched"
-                        class="error-message">
-                Description is required
-            </span>
-                    <span
-                        *ngIf="formAddExercise.controls.description.hasError('maxlength') && formAddExercise.controls.description.touched"
-                        class="error-message">
-                Description is too long (max 200 characters)
-            </span>
-
-                    <!--Submit-->
-                    <ion-item>
-                        <ion-button (click)="submit()" [disabled]="!formAddExercise.valid">
-                            <ion-icon name="add-outline"></ion-icon>
-                            Add exercise
-                        </ion-button>
-                    </ion-item>
-                </ion-list>
-            </form>
+            <app-form-add-exercise [updateExercise]="updateExercise"
+                                   (openModalUpdateExercise)="closeModal()"></app-form-add-exercise>
         </ion-content>
     </ng-template>
 </ion-modal>
@@ -134,108 +27,5 @@
 
 <ng-container *ngIf="currentRoute.includes('admin')">
     <h1>Add exercise</h1>
-    <form [formGroup]="formAddExercise">
-        <ion-list>
-            <!--Exercise name-->
-            <ion-item>
-                <ion-input
-                    formControlName="name"
-                    label="Exercise name"
-                    placeholder="Développé couché"></ion-input>
-            </ion-item>
-            <span *ngIf="formAddExercise.controls.name.hasError('required') && formAddExercise.controls.name.touched"
-                  class="error-message">
-                Exercise name is required
-            </span>
-
-            <!--Muscle-->
-            <ion-item>
-                <ion-select
-                    formControlName="muscle"
-                    label="Targeted muscle"
-                    label-placement="floating">
-                    <ng-container *ngFor="let muscle of muscles">
-                        <ion-select-option
-                            value="{{muscle}}"
-                        >{{ muscle.charAt(0).toUpperCase() + muscle.slice(1) }}</ion-select-option>
-                    </ng-container>
-                </ion-select>
-            </ion-item>
-
-            <span
-                *ngIf="formAddExercise.controls.muscle.hasError('required') && formAddExercise.controls.muscle.touched"
-                class="error-message">
-                Targeted muscle is required
-            </span>
-
-            <!--Weight-->
-            <ion-item>
-                <ion-input
-                    type="number"
-                    min="0"
-                    formControlName="weight"
-                    label="Weight"
-                    placeholder="50"></ion-input>
-            </ion-item>
-            <span
-                *ngIf="formAddExercise.controls.weight.hasError('negative') && formAddExercise.controls.weight.touched"
-                class="error-message">
-                Weight must be at least 1
-            </span>
-
-            <!--Sets-->
-            <ion-item>
-                <ion-input
-                    formControlName="sets"
-                    label="Sets"
-                    placeholder="4 séries 10 reps"></ion-input>
-            </ion-item>
-            <span *ngIf="formAddExercise.controls.sets.hasError('required') && formAddExercise.controls.sets.touched"
-                  class="error-message">
-                Sets is required
-            </span>
-
-            <!--Image-->
-            <ion-item>
-                <ion-input
-                    formControlName="image"
-                    label="Image URL"
-                    placeholder="https://entrainement-sportif.fr/abdominaux-coude-genou-oppose.gif"></ion-input>
-            </ion-item>
-            <span *ngIf="formAddExercise.controls.image.hasError('required') && formAddExercise.controls.image.touched"
-                  class="error-message">
-                Image is required
-            </span>
-            <span *ngIf="formAddExercise.controls.image.hasError('maxlength') && formAddExercise.controls.image.touched"
-                  class="error-message">
-                Image URL is too long (max 200 characters)
-            </span>
-
-            <!--Description-->
-            <ion-item>
-                <ion-textarea
-                    formControlName="description"
-                    maxlength="200"
-                    label="Description" placeholder="Lorem ipsum"></ion-textarea>
-            </ion-item>
-            <span
-                *ngIf="formAddExercise.controls.description.hasError('required') && formAddExercise.controls.description.touched"
-                class="error-message">
-                Description is required
-            </span>
-            <span
-                *ngIf="formAddExercise.controls.description.hasError('maxlength') && formAddExercise.controls.description.touched"
-                class="error-message">
-                Description is too long (max 200 characters)
-            </span>
-
-            <!--Submit-->
-            <ion-item>
-                <ion-button (click)="submit()" [disabled]="!formAddExercise.valid">
-                    <ion-icon name="add-outline"></ion-icon>
-                    Add exercise
-                </ion-button>
-            </ion-item>
-        </ion-list>
-    </form>
+    <app-form-add-exercise [updateExercise]="updateExercise"></app-form-add-exercise>
 </ng-container>

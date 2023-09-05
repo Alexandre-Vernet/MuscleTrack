@@ -19,9 +19,9 @@ export class AdminService {
         await setDoc(muscleRef, {
             [exercise.name]: {
                 sets: exercise.sets,
-                description: exercise.description,
+                description: exercise.description || null,
                 image: exercise.image,
-                weight: exercise.weight
+                weight: exercise.weight || null,
             }
         }, { merge: true });
 
