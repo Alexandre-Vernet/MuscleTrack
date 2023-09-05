@@ -18,7 +18,7 @@
             </ion-toolbar>
         </ion-header>
         <ion-content class="ion-padding">
-            <app-form-add-exercise [updateExercise]="updateExercise"
+            <app-form-add-exercise [inputUpdateExercise]="updateExercise"
                                    (openModalUpdateExercise)="closeModal()"></app-form-add-exercise>
         </ion-content>
     </ng-template>
@@ -27,5 +27,5 @@
 
 <ng-container *ngIf="currentRoute.includes('admin')">
     <h1>Add exercise</h1>
-    <app-form-add-exercise [updateExercise]="updateExercise"></app-form-add-exercise>
+    <app-form-add-exercise [inputUpdateExercise]="updateExercise"></app-form-add-exercise>
 </ng-container>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Exercise } from "../../exercises/exercise";
+import { AddExercise, Exercise } from "../../exercises/exercise";
 import { AdminService } from "../admin.service";
 import { ExercisesService } from "../../exercises/exercises.service";
 import { Subject } from "rxjs";
@@ -11,7 +11,7 @@ import { Subject } from "rxjs";
     styleUrls: ['./form-add-exercise.component.scss'],
 })
 export class FormAddExerciseComponent implements OnInit {
-    @Input() updateExercise: Exercise;
+    @Input() inputUpdateExercise: Exercise;
     @Output() openModalUpdateExercise = new Subject<boolean>();
     muscles: string[] = [];
     formAddExercise = new FormGroup({
@@ -31,19 +31,13 @@ export class FormAddExerciseComponent implements OnInit {
 
     async ngOnInit() {
         this.muscles = await this.exercisesService.getAllMusclesName();
-        this.formAddExercise.patchValue(this.updateExercise);
-    }
-
-    submit() {
-        if (this.formAddExercise.valid) {
-            this.addExercise();
-            return;
-        }
+        this.formAddExercise.patchValue(this.inputUpdateExercise
+        );
     }
 
     async addExercise() {
         const { muscle, name, weight, sets, image, description } = this.formAddExercise.value;
-        const exercise: Exercise = {
+        const exercise: AddExercise = {
             muscle,
             name,
             weight,
@@ -52,7 +46,28 @@ export class FormAddExerciseComponent implements OnInit {
             description,
         };
 
-        await this.adminService.addOrUpdateExercise(exercise);
+        await this.adminService.addExercise(exercise);
+
+        // Reset the form
+        this.formAddExercise.reset();
+
+        // Close the modal
+        this.openModalUpdateExercise.next(false);
+    }
+
+    async updateExercise() {
+        const { muscle, name, weight, sets, image, description } = this.formAddExercise.value;
+        const exercise: Exercise = {
+            id: this.inputUpdateExercise.id,
+            muscle,
+            name,
+            weight,
+            sets,
+            image,
+            description,
+        };
+
+        await this.adminService.updateExercise(exercise);
 
         // Reset the form
         this.formAddExercise.reset();

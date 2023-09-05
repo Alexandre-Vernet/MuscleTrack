@@ -1,4 +1,4 @@
-<form [formGroup]="formAddExercise" (ngSubmit)="submit()">
+<form [formGroup]="formAddExercise" (ngSubmit)="inputUpdateExercise ? updateExercise() : addExercise() ">
     <ion-list>
         <!--Exercise name-->
         <ion-item>
@@ -106,7 +106,7 @@
         <ion-item>
             <ion-button type="submit" [disabled]="!formAddExercise.valid">
                 <ion-icon name="add-outline"></ion-icon>
-                Add exercise
+                {{ inputUpdateExercise ? 'Update' : 'Add' }}
             </ion-button>
         </ion-item>
     </ion-list>
