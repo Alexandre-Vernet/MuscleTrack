@@ -27,6 +27,14 @@ export class ExerciseCardComponent implements OnInit {
             });
     }
 
+    async decreaseWeight(exercise: Exercise) {
+        this.exercises.find((e) => e.name === exercise.name).weight = await this.exercisesService.decreaseWeight(exercise);
+    }
+
+    async increaseWeight(exercise: Exercise) {
+        this.exercises.find((e) => e.name === exercise.name).weight = await this.exercisesService.increaseWeight(exercise);
+    }
+
     openModalUpdateExercise(exercise: Exercise) {
         this.openModalEditExercise.next(exercise);
     }

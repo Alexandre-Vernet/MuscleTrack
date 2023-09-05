@@ -3,6 +3,6 @@ export interface Exercise {
     name: string;
     sets: string;
     image: string;
-    weight?: string;
+    weight?: number;
     description?: string;
 }

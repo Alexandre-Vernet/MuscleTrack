@@ -19,6 +19,7 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     formAddExercise = new FormGroup({
         muscle: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
+        weight: new FormControl(),
         sets: new FormControl('', [Validators.required]),
         image: new FormControl('', [Validators.required]),
         description: new FormControl(''),
@@ -54,10 +55,11 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     }
 
     async addExercise() {
-        const { muscle, name, sets, image, description } = this.formAddExercise.value;
+        const { muscle, name, weight, sets, image, description } = this.formAddExercise.value;
         const exercise: Exercise = {
             muscle,
             name,
+            weight,
             sets,
             image,
             description,

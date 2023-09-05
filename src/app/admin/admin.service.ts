@@ -21,6 +21,7 @@ export class AdminService {
                 sets: exercise.sets,
                 description: exercise.description,
                 image: exercise.image,
+                weight: exercise.weight
             }
         }, { merge: true });
 
