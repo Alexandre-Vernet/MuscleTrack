@@ -17,12 +17,12 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     @ViewChild(IonModal) modal: IonModal;
     currentRoute: string = '';
     formAddExercise = new FormGroup({
-        muscle: new FormControl('', [Validators.required]),
-        name: new FormControl('', [Validators.required]),
-        weight: new FormControl(),
-        sets: new FormControl('', [Validators.required]),
-        image: new FormControl('', [Validators.required]),
-        description: new FormControl(''),
+        muscle: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
+        name: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
+        weight: new FormControl(0, [this.noNegativeWeightValidator]),
+        sets: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
+        image: new FormControl('', [Validators.required, Validators.maxLength(200), this.noWhitespaceValidator]),
+        description: new FormControl('', [Validators.maxLength(200), this.noWhitespaceValidator]),
     });
 
     constructor(
@@ -51,6 +51,7 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     submit() {
         if (this.formAddExercise.valid) {
             this.addExercise();
+            return;
         }
     }
 
@@ -74,5 +75,13 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     closeModal() {
         this.modal.dismiss(null, 'cancel');
         this.formAddExercise.reset();
+    }
+
+    public noWhitespaceValidator(control: FormControl) {
+        return (control.value || '').trim().length ? null : { 'whitespace': true };
+    }
+
+    public noNegativeWeightValidator(control: FormControl) {
+        return (control.value || '') > 0 ? null : { 'negative': true };
     }
 }
