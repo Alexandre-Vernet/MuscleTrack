@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
-import { Exercise } from "./exercise";
+import { Exercise } from './exercise';
 
 @Injectable({
     providedIn: 'root'
@@ -13,7 +13,7 @@ export class ExercisesService {
     }
 
     async getAllMusclesName(): Promise<string[]> {
-        const q = query(collection(this.db, "exercises"));
+        const q = query(collection(this.db, 'exercises'));
         const exercises: string[] = [];
 
         const querySnapshot = await getDocs(q);
@@ -27,16 +27,17 @@ export class ExercisesService {
     }
 
     async getExercises(muscleName: string): Promise<Exercise[]> {
-        const docRef = doc(this.db, "exercises", muscleName);
+        const docRef = doc(this.db, 'exercises', muscleName);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
             const exercises: Exercise[] = Object.keys(docSnap.data()).map((key) => {
                 return {
+                    muscle: muscleName,
                     name: key,
-                    reps: docSnap.data()[key].reps,
+                    sets: docSnap.data()[key].sets,
                     image: docSnap.data()[key].image,
-                    weight: docSnap.data()[key].poids
+                    weight: docSnap.data()[key].weight
                 };
             });
             exercises.sort((a, b) => {
@@ -49,7 +50,7 @@ export class ExercisesService {
     }
 
     async getExerciseInfo(muscleName: string, exerciseName: string): Promise<Exercise> {
-        const docRef = doc(this.db, "exercises", muscleName);
+        const docRef = doc(this.db, 'exercises', muscleName);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -59,8 +60,9 @@ export class ExercisesService {
             }
         } else {
             return {
+                muscle: '',
                 name: '',
-                reps: '0',
+                sets: '0',
                 image: '',
                 weight: '0'
             }
