@@ -4,7 +4,14 @@
         <ion-item *ngFor="let exercise of exercises">
             <ion-label>{{ exercise.name }}</ion-label>
             <ion-label>{{ exercise.sets }}</ion-label>
-            <ion-label>{{ exercise.weight }}</ion-label>
+
+            <!-- Weight -->
+            <ion-item *ngIf="exercise.weight">
+                <ion-icon (click)="decreaseWeight(exercise)" class="cursor-pointer" name="remove-circle-outline"></ion-icon>
+                <ion-label>{{ exercise.weight }} kg</ion-label>
+                <ion-icon (click)="increaseWeight(exercise)" class="cursor-pointer" name="add-circle-outline"></ion-icon>
+            </ion-item>
+
             <!-- Edit -->
             <ion-icon (click)="openModalUpdateExercise(exercise)" name="create-outline"></ion-icon>
 

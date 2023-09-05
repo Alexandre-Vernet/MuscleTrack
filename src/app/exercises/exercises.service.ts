@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { collection, doc, getDoc, getDocs, getFirestore, query } from 'firebase/firestore';
+import { collection, doc, getDoc, getDocs, getFirestore, query, setDoc } from 'firebase/firestore';
 import { Exercise } from './exercise';
 
 @Injectable({
@@ -64,8 +64,28 @@ export class ExercisesService {
                 name: '',
                 sets: '0',
                 image: '',
-                weight: '0'
+                weight: 0
             }
         }
+    }
+
+    async decreaseWeight(exercise: Exercise) {
+        const muscleRef = doc(this.db, 'exercises', exercise.muscle);
+        await setDoc(muscleRef, {
+            [exercise.name]: {
+                weight: exercise.weight - 1.25,
+            }
+        }, { merge: true });
+        return exercise.weight - 1.25;
+    }
+
+    async increaseWeight(exercise: Exercise) {
+        const muscleRef = doc(this.db, 'exercises', exercise.muscle);
+        await setDoc(muscleRef, {
+            [exercise.name]: {
+                weight: exercise.weight + 1.25,
+            }
+        }, { merge: true });
+        return exercise.weight + 1.25;
     }
 }
