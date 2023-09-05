@@ -31,13 +31,14 @@ export class ExercisesService {
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            const exercises: Exercise[] = Object.keys(docSnap.data()).map((key) => {
+            const exercises: Exercise[] = Object.keys(docSnap.data()).map((id) => {
                 return {
+                    id: id,
                     muscle: muscleName,
-                    name: key,
-                    sets: docSnap.data()[key].sets,
-                    image: docSnap.data()[key].image,
-                    weight: docSnap.data()[key].weight
+                    name: docSnap.data()[id].name,
+                    sets: docSnap.data()[id].sets,
+                    image: docSnap.data()[id].image,
+                    weight: docSnap.data()[id].weight
                 };
             });
             exercises.sort((a, b) => {
@@ -60,6 +61,7 @@ export class ExercisesService {
             }
         } else {
             return {
+                id: '',
                 muscle: '',
                 name: '',
                 sets: '0',
