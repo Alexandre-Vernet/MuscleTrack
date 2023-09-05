@@ -3,7 +3,7 @@
     <ion-list>
         <ion-item *ngFor="let exercise of exercises">
             <ion-label>{{exercise.name}}</ion-label>
-            <ion-label>{{exercise.reps}}</ion-label>
+            <ion-label>{{exercise.sets}}</ion-label>
             <ion-label>{{exercise.weight}}</ion-label>
             <!-- Edit -->
             <ion-icon (click)="openModalUpdateExercise(exercise)" name="create-outline"></ion-icon>

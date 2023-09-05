@@ -1,9 +1,9 @@
 import { Component, Input, OnChanges, OnInit, ViewChild } from '@angular/core';
-import { ExercisesService } from "../../exercises/exercises.service";
-import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Exercise } from "../../exercises/exercise";
-import { AdminService } from "../admin.service";
-import { IonModal } from "@ionic/angular";
+import { ExercisesService } from '../../exercises/exercises.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Exercise } from '../../exercises/exercise';
+import { AdminService } from '../admin.service';
+import { IonModal } from '@ionic/angular';
 
 @Component({
     selector: 'app-add-exercise',
@@ -17,7 +17,7 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     formAddExercise = new FormGroup({
         muscle: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
-        reps: new FormControl('', [Validators.required]),
+        sets: new FormControl('', [Validators.required]),
         image: new FormControl('', [Validators.required]),
         description: new FormControl(''),
     });
@@ -38,7 +38,7 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     ngOnChanges() {
         if (this.updateExercise) {
             this.formAddExercise.patchValue(this.updateExercise);
-            document.getElementById("open-modal").click();
+            document.getElementById('open-modal').click();
         }
     }
 
@@ -49,11 +49,11 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     }
 
     async addExercise() {
-        const { muscle, name, reps, image, description } = this.formAddExercise.value;
+        const { muscle, name, sets, image, description } = this.formAddExercise.value;
         const exercise: Exercise = {
             muscle,
             name,
-            reps,
+            sets,
             image,
             description,
         };

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
-import { Exercise } from "../exercise";
-import { ExercisesService } from "../exercises.service";
-import { Subject } from "rxjs";
-import { AdminService } from "../../admin/admin.service";
+import { Exercise } from '../exercise';
+import { ExercisesService } from '../exercises.service';
+import { Subject } from 'rxjs';
+import { AdminService } from '../../admin/admin.service';
 
 @Component({
     selector: 'app-exercise-card',

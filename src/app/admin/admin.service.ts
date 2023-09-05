@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { deleteField, doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
-import { ToastService } from "../toast/toast.service";
-import { Exercise } from "../exercises/exercise";
+import { deleteField, doc, getFirestore, setDoc, updateDoc } from 'firebase/firestore';
+import { ToastService } from '../toast/toast.service';
+import { Exercise } from '../exercises/exercise';
 
 @Injectable({
     providedIn: 'root'
@@ -18,7 +18,7 @@ export class AdminService {
         const muscleRef = doc(this.db, 'exercises', exercise.muscle);
         await setDoc(muscleRef, {
             [exercise.name]: {
-                reps: exercise.reps,
+                sets: exercise.sets,
                 description: exercise.description,
                 image: exercise.image,
             }

@@ -1,5 +1,5 @@
 import { EventEmitter, Injectable } from '@angular/core';
-import { Toast } from "./toast";
+import { Toast } from './toast';
 
 @Injectable({
     providedIn: 'root'

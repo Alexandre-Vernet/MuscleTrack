@@ -6,7 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ToastModule } from "./toast/toast.module";
+import { ToastModule } from './toast/toast.module';
 
 @NgModule({
   declarations: [AppComponent],
