@@ -4,6 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Exercise } from '../../exercises/exercise';
 import { AdminService } from '../admin.service';
 import { IonModal } from '@ionic/angular';
+import { Router } from "@angular/router";
 
 @Component({
     selector: 'app-add-exercise',
@@ -14,6 +15,7 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     @Input() updateExercise: Exercise;
     muscles: string[] = [];
     @ViewChild(IonModal) modal: IonModal;
+    currentRoute: string = '';
     formAddExercise = new FormGroup({
         muscle: new FormControl('', [Validators.required]),
         name: new FormControl('', [Validators.required]),
@@ -25,6 +27,7 @@ export class AddExerciseComponent implements OnInit, OnChanges {
     constructor(
         private readonly exercisesService: ExercisesService,
         private readonly adminService: AdminService,
+        private readonly router: Router
     ) {
     }
 
@@ -33,6 +36,8 @@ export class AddExerciseComponent implements OnInit, OnChanges {
             .then((muscles) => {
                 this.muscles = muscles;
             });
+
+        this.currentRoute = this.router.url;
     }
 
     ngOnChanges() {
@@ -61,7 +66,7 @@ export class AddExerciseComponent implements OnInit, OnChanges {
         await this.adminService.addOrUpdateExercise(exercise);
 
         // Close the modal
-        this.closeModal()
+        this.closeModal();
     }
 
     closeModal() {
