@@ -74,11 +74,6 @@
                 placeholder="https://entrainement-sportif.fr/abdominaux-coude-genou-oppose.gif"></ion-input>
         </ion-item>
         <span
-            *ngIf="formAddExercise.controls.image.hasError('required') && formAddExercise.controls.image.touched"
-            class="error-message">
-                Image is required
-            </span>
-        <span
             *ngIf="formAddExercise.controls.image.hasError('maxlength') && formAddExercise.controls.image.touched"
             class="error-message">
                 Image URL is too long (max 200 characters)
@@ -88,7 +83,8 @@
         <ion-item>
             <ion-textarea
                 formControlName="description"
-                maxlength="200"
+                maxlength="1000"
+                autoGrow="true"
                 label="Description" placeholder="Lorem ipsum"></ion-textarea>
         </ion-item>
         <span
@@ -99,7 +95,7 @@
         <span
             *ngIf="formAddExercise.controls.description.hasError('maxlength') && formAddExercise.controls.description.touched"
             class="error-message">
-                Description is too long (max 200 characters)
+                Description is too long (max 1000 characters)
             </span>
 
         <!--Submit-->

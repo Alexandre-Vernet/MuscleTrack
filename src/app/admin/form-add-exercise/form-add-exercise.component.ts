@@ -15,12 +15,12 @@ export class FormAddExerciseComponent implements OnInit {
     @Output() openModalUpdateExercise = new Subject<boolean>();
     muscles: string[] = [];
     formAddExercise = new FormGroup({
-        muscle: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
-        name: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
-        weight: new FormControl(0, [Validators.max(500), this.noNegativeWeightValidator]),
-        sets: new FormControl('', [Validators.required, this.noWhitespaceValidator]),
-        image: new FormControl('', [Validators.required, Validators.maxLength(200), this.noWhitespaceValidator]),
-        description: new FormControl('', [Validators.maxLength(200), this.noWhitespaceValidator]),
+        muscle: new FormControl(null, [Validators.required, this.noWhitespaceValidator]),
+        name: new FormControl(null, [Validators.required, this.noWhitespaceValidator]),
+        weight: new FormControl(null,[Validators.max(500), this.noNegativeWeightValidator]),
+        sets: new FormControl('4 séries 10 reps', [Validators.required, this.noWhitespaceValidator]),
+        image: new FormControl(null, [Validators.maxLength(200), this.noWhitespaceValidator]),
+        description: new FormControl(null, [Validators.maxLength(1000), this.noWhitespaceValidator]),
     });
 
     constructor(
@@ -31,8 +31,7 @@ export class FormAddExerciseComponent implements OnInit {
 
     async ngOnInit() {
         this.muscles = await this.exercisesService.getAllMusclesName();
-        this.formAddExercise.patchValue(this.inputUpdateExercise
-        );
+        this.formAddExercise.patchValue(this.inputUpdateExercise);
     }
 
     async addExercise() {
@@ -48,8 +47,7 @@ export class FormAddExerciseComponent implements OnInit {
 
         await this.adminService.addExercise(exercise);
 
-        // Reset the form
-        this.formAddExercise.reset();
+        this.resetForm();
 
         // Close the modal
         this.openModalUpdateExercise.next(false);
@@ -69,13 +67,22 @@ export class FormAddExerciseComponent implements OnInit {
 
         await this.adminService.updateExercise(exercise);
 
-        // Reset the form
-        this.formAddExercise.reset();
+        this.resetForm();
 
         // Close the modal
         this.openModalUpdateExercise.next(false);
     }
 
+    resetForm() {
+        this.formAddExercise.patchValue({
+            muscle: null,
+            name: null,
+            weight: null,
+            sets: '4 séries 10 reps',
+            image: null,
+            description: null,
+        });
+    }
 
     public noWhitespaceValidator(control: FormControl) {
         if (!control.value) {
