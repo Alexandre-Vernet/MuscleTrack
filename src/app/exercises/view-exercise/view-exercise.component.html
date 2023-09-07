@@ -4,7 +4,7 @@
             <ion-back-button default-href="/tabs/exercises"></ion-back-button>
         </ion-buttons>
         <ion-title>
-            {{ exerciseName }}
+            {{ exercise?.name }}
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -12,7 +12,7 @@
 <ion-content [fullscreen]="true">
     <ion-header collapse="condense">
         <ion-toolbar>
-            <ion-title size="large">{{ exerciseName }}</ion-title>
+            <ion-title size="large">{{ exercise?.name }}</ion-title>
         </ion-toolbar>
     </ion-header>
 
@@ -21,7 +21,7 @@
             <h1>{{ exercise.name }}</h1>
             <h3>{{ exercise.weight }}</h3>
             <h3>{{ exercise.sets }}</h3>
-            <img src="{{ exercise.image }}" alt="exercise image">
+            <img *ngIf="exercise.image" src="{{ exercise.image }}" alt="exercise image">
             <p>
                 {{ exercise.description }}
             </p>

@@ -50,15 +50,12 @@ export class ExercisesService {
         }
     }
 
-    async getExerciseInfo(muscleName: string, exerciseName: string): Promise<Exercise> {
+    async getExerciseInfo(muscleName: string, exerciseId: string): Promise<Exercise> {
         const docRef = doc(this.db, 'exercises', muscleName);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
-            return {
-                ...docSnap.data()[exerciseName],
-                name: exerciseName
-            }
+            return docSnap.data()[exerciseId]
         } else {
             return {
                 id: '',

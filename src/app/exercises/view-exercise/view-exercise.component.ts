@@ -9,7 +9,6 @@ import { Exercise } from '../exercise';
     styleUrls: ['./view-exercise.component.scss'],
 })
 export class ViewExerciseComponent implements OnInit {
-    exerciseName: string = '';
     exercise: Exercise;
 
     constructor(
@@ -20,11 +19,9 @@ export class ViewExerciseComponent implements OnInit {
 
     ngOnInit() {
         const muscleName = this.activatedRoute.snapshot.paramMap.get('muscleName');
-        const exerciseName = this.activatedRoute.snapshot.paramMap.get('exerciseName');
-        if (exerciseName && muscleName) {
-            this.exerciseName = exerciseName;
-
-            this.exercisesService.getExerciseInfo(muscleName, exerciseName)
+        const exerciseId = this.activatedRoute.snapshot.paramMap.get('exerciseId');
+        if (exerciseId && muscleName) {
+            this.exercisesService.getExerciseInfo(muscleName, exerciseId)
                 .then((exercise) => {
                     this.exercise = exercise;
                 });

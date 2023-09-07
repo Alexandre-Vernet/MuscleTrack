@@ -48,7 +48,6 @@ export class AdminService {
     }
 
     async deleteExercise(exercise: Exercise) {
-        console.log(exercise)
         const muscleRef = doc(this.db, 'exercises', exercise.muscle);
         await updateDoc(muscleRef, {
             [exercise.id]: deleteField()
