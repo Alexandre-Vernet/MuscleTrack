@@ -9,7 +9,7 @@ const routes: Routes = [
         component: ExercisesPage,
     },
     {
-        path: 'exercise/:muscleName/:exerciseName',
+        path: 'exercise/:muscleName/:exerciseId',
         component: ViewExerciseComponent
     }
 ];
